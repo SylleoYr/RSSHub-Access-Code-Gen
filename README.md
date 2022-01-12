@@ -16,9 +16,10 @@ See [here](https://docs.rsshub.app/install/#pei-zhi-fang-wen-kong-zhi-pei-zhi) f
 Install the [PyInstaller](https://pypi.org/project/pyinstaller/) first: `pip install pyinstaller`, then run command: 
 
 ```bash
-pyinstaller -wF main.py
-# or with icon
-pyinstaller -i RSSHub.ico -wF main.py
+# for Windows
+pyinstaller --add-data "res;res" --icon res/icon.ico -n "CodeGenerator" -wF main.py
+# for Linux
+pyinstaller --add-data "res:res" --icon res/icon.ico -n "CodeGenerator" -wF main.py
 ```
 
 ## Thanks

@@ -5,7 +5,7 @@
 Author: Sylleo
 Version: 0.0.1
 Date: 2022-01-12 08:56:36
-LastEditTime: 2022-01-12 15:20:09
+LastEditTime: 2022-01-12 19:01:07
 LastEditors: Sylleo
 Description: An access code generator for RSSHub.
 FilePath: /rsshub-access-code-gen/main.py
@@ -14,26 +14,41 @@ Copyright (C) 2022 Sylleo. All rights reserved.
 '''
 
 from hashlib import md5
+import base64
+import os
+import sys
 import PySimpleGUI as sg
 
-sg.theme('DarkGreen6')
+
+def file_path(file_name):
+    relative_path = os.path.join('res', file_name)
+    
+    if getattr(sys, 'frozen', None):
+        base_dir = sys._MEIPASS
+    else:
+        base_dir = os.path.abspath(".")
+
+    return os.path.join(base_dir, relative_path)
 
 
 def main():
+    with open(file_path('icon.png'), 'rb') as i:
+        icon = base64.b64encode(i.read())
+
     layout = [
         [sg.Text('RSSHub URL', size=(10, 1)), sg.InputText(default_text='https://rsshub.app', key='-URL-', focus=True, size=(65, 1))],
         [sg.Text('Access Key', size=(10, 1)), sg.InputText(key='-KEY-', size=(65, 1))],
         [sg.Text('Route', size=(10, 1)), sg.InputText(key='-ROUTE-', size=(65, 1))],
         [sg.Text('Access Code', size=(10, 1)), sg.Multiline(key='-OUTPUT-', disabled=True, auto_refresh=True, rstrip=True, size=(65, 10))],
         [
-            sg.Button('Ok', bind_return_key=True, size=(10, 1), pad=((0, 20), (0, 0))),
+            sg.Button('Ok', bind_return_key=True, button_color='teal', size=(10, 1), pad=((0, 20), (0, 0))),
             sg.Button('Copy Access Code', button_color='green'),
             sg.Button('Copy Feed URL with Code', button_color='green'),
             sg.Button('Copy Feed URL with Key', button_color='green')
         ]
     ]
 
-    window = sg.Window('RSSHub Access Code Generator', layout=layout)
+    window = sg.Window('RSSHub Access Code Generator', layout=layout, icon=icon)
 
     while True:
         event, values = window.read()
@@ -89,4 +104,5 @@ def main():
 
 
 if __name__ == '__main__':
+    sg.theme('TealMono')
     main()
