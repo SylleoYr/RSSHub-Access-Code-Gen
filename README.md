@@ -22,6 +22,8 @@ pyinstaller --add-data "res;res" --icon res/icon.ico -n "CodeGenerator" -wF main
 pyinstaller --add-data "res:res" --icon res/icon.ico -n "CodeGenerator" -wF main.py
 ```
 
+The generated executable file is located in the `dist` directory.
+
 ## Thanks
 
 - [PySimpleGUI/PySimpleGUI](https://github.com/PySimpleGUI/PySimpleGUI)
