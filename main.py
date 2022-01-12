@@ -5,10 +5,10 @@
 Author: Sylleo
 Version: 0.0.1
 Date: 2022-01-12 08:56:36
-LastEditTime: 2022-01-12 11:31:21
+LastEditTime: 2022-01-12 15:20:09
 LastEditors: Sylleo
 Description: An access code generator for RSSHub.
-FilePath: /rsshub-access-gen/main.py
+FilePath: /rsshub-access-code-gen/main.py
 Environment: Python=3.9.7  PySimpleGUI=4.56.0
 Copyright (C) 2022 Sylleo. All rights reserved.
 '''
@@ -75,14 +75,14 @@ def main():
 
             if output:
                 # print(output)
-                # feed_url_code = output[1]
+                # feed_url_code = output[3]
                 sg.clipboard_set(output[3])
         if event == 'Copy Feed URL with Key':
             output = window['-OUTPUT-'].get().splitlines()
 
             if output:
                 # print(output)
-                # feed_url_key = output[1]
+                # feed_url_key = output[5]
                 sg.clipboard_set(output[5])
 
     window.close()
